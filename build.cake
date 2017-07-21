@@ -206,13 +206,6 @@ Task("Run-Unit-Tests")
         .Select(name => MakeAbsolute(File("./tests/" + name + "/bin/" + parameters.DirSuffix + "/" + name + ".dll")))
         .ToList();
 
-    if (parameters.IsRunningOnWindows)
-    {
-        var leakTests = GetFiles("./tests/Avalonia.LeakTests/bin/" + parameters.DirSuffix + "/*.LeakTests.dll");
-
-        unitTests.AddRange(leakTests);
-    }
-
     var toolPath = (parameters.IsPlatformAnyCPU || parameters.IsPlatformX86) ? 
         "./tools/xunit.runner.console/tools/xunit.console.x86.exe" :
         "./tools/xunit.runner.console/tools/xunit.console.exe";
